@@ -3,9 +3,13 @@
     "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
     "topics": "dev.bookings.flights",
     "behavior.on.null.values": "delete",
-    "transforms": "unwrap",
+    "transforms": "unwrap,createKey,setKey",
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
     "transforms.unwrap.delete.handling.mode": "none",
     "transforms.unwrap.drop.tombstones": false,
+    "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.createKey.fields": "flight_id",
+    "transforms.setKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.setKey.field": "flight_id",
     "connection.url": "http://elasticsearch:9200"
 }
