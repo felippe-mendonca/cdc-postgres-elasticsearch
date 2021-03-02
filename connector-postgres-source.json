@@ -1,0 +1,13 @@
+{
+    "name": "postgres-demo-bookings",
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.server.name": "dev",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.sslmode": "disable",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "demo",
+    "schema.include.list": "bookings",
+    "table.include.list": "bookings.flights"
+}

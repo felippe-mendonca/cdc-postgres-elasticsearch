@@ -1,0 +1,11 @@
+{
+    "name": "elasticsearch-bookings-flights",
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+    "topics": "dev.bookings.flights",
+    "behavior.on.null.values": "delete",
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.delete.handling.mode": "none",
+    "transforms.unwrap.drop.tombstones": false,
+    "connection.url": "http://elasticsearch:9200"
+}
