@@ -63,7 +63,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-connect
-    image: cnfldemos/cp-server-connect-datagen:0.4.0-6.0.1
     hostname: connect
     container_name: connect
     depends_on:
