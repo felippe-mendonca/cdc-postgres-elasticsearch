@@ -12,6 +12,10 @@
         "schema.include.list": "bookings",
         "table.include.list": "bookings.flights",
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
-        "key.converter.schemas.enable": false
+        "key.converter.schemas.enable": false,
+        "transforms": "unwrap",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.delete.handling.mode": "none",
+        "transforms.unwrap.drop.tombstones": false
     }
 }

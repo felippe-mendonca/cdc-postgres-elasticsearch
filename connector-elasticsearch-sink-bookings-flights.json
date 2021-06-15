@@ -9,10 +9,7 @@
         "key.ignore": false,
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": false,
-        "transforms": "unwrap,setKey",
-        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
-        "transforms.unwrap.delete.handling.mode": "none",
-        "transforms.unwrap.drop.tombstones": false,
+        "transforms": "setKey",
         "transforms.setKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
         "transforms.setKey.field": "flight_id"
     }
