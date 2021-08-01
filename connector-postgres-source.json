@@ -2,6 +2,7 @@
     "name": "postgres-demo-bookings",
     "config": {
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+        "slot.name": "dev_postgres_demo_bookings",
         "database.server.name": "dev",
         "database.hostname": "postgres",
         "database.port": "5432",
@@ -13,9 +14,13 @@
         "table.include.list": "bookings.flights",
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": false,
-        "transforms": "unwrap",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": false,
+        "transforms": "unwrap,setKey",
         "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
         "transforms.unwrap.delete.handling.mode": "none",
-        "transforms.unwrap.drop.tombstones": false
+        "transforms.unwrap.drop.tombstones": false,
+        "transforms.setKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+        "transforms.setKey.field": "flight_id"
     }
 }

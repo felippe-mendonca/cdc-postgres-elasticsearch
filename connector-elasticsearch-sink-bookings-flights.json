@@ -1,16 +1,15 @@
 {
     "name": "elasticsearch-bookings-flights",
     "config": {
-        "name": "elasticsearch-bookings-flights",
         "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
         "connection.url": "http://elasticsearch:9200",
         "topics": "dev.bookings.flights",
         "behavior.on.null.values": "delete",
         "key.ignore": false,
+        "schema.ignore": true,
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": false,
-        "transforms": "setKey",
-        "transforms.setKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
-        "transforms.setKey.field": "flight_id"
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": false
     }
 }
