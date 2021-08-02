@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    command: redis-server --requirepass PLEASE_CHANGE_ME
+  pgsync:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./pgsync-schema.json:/opt/schema.json"
+    command: ./runserver.sh
+    sysctls:
+      - net.ipv4.tcp_keepalive_time=200
+      - net.ipv4.tcp_keepalive_intvl=200
+      - net.ipv4.tcp_keepalive_probes=5
+    labels:
+      org.label-schema.name: "pgsync"
+      org.label-schema.description: "Postgres to elasticsearch sync"
+      com.label-schema.service-type: "daemon"
+    depends_on:
+      - redis
+    extra_hosts:
+      - "postgres:172.19.0.1"
+      - "elasticsearch:172.19.0.1"
+    environment:
+      - PG_USER=postgres
+      - PG_HOST=postgres
+      - PG_PASSWORD=postgres
+      - LOG_LEVEL=INFO
+      - ELASTICSEARCH_PORT=9200
+      - ELASTICSEARCH_SCHEME=http
+      - ELASTICSEARCH_HOST=elasticsearch
+      - REDIS_HOST=redis
+      - REDIS_AUTH=PLEASE_CHANGE_ME
