@@ -10,6 +10,16 @@
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": false,
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-        "value.converter.schemas.enable": false
+        "value.converter.schemas.enable": false,
+        "transforms": "MessageTimestampRouter",
+        "transforms.MessageTimestampRouter.type": "io.confluent.connect.transforms.MessageTimestampRouter",
+        "transforms.MessageTimestampRouter.topic.format": "${topic}_${timestamp}",
+        "transforms.MessageTimestampRouter.message.timestamp.format": "yyyy-MM-dd'T'HH:mm:ss'Z'",
+        "transforms.MessageTimestampRouter.topic.timestamp.format": "yyyyMM",
+        "transforms.MessageTimestampRouter.message.timestamp.keys": "scheduled_departure",
+        "transforms.MessageTimestampRouter.predicate": "isFlights",
+        "predicates": "isFlights",
+        "predicates.isFlights.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
+        "predicates.isFlights.pattern": ".*.bookings.flights"
     }
 }
